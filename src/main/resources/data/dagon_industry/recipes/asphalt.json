@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "item": "dagon_industry:slag"
+    },
+    {
+      "item": "dagon_industry:slag"
+    }
+  ],
+  "result":
+  {
+    "item": "dagon_industry:asphalt",
+    "count": 2
+  }
+}

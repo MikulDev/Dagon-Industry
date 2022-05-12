@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "  D",
+    " SS",
+    " II"
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    },
+    "S":
+    {
+      "item": "dagon_industry:steel_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:lathe",
+    "count": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "facing=north": { "model": "dagon_industry:block/fermenter" },
+    "facing=south": { "model": "dagon_industry:block/fermenter", "y": 180},
+    "facing=east": { "model": "dagon_industry:block/fermenter", "y": 90},
+    "facing=west": { "model": "dagon_industry:block/fermenter", "y": 270}
+  }
+}

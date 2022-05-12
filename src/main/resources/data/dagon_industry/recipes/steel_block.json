@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key":
+  {
+    "S":
+    {
+      "item": "dagon_industry:steel_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:steel_block",
+    "count": 1
+  }
+}

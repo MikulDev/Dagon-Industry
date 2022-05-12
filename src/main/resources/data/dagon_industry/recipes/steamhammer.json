@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " D ",
+    "I I",
+    "III"
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:steamhammer",
+    "count": 1
+  }
+}

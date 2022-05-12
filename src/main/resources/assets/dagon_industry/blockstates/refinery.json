@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "facing=north": { "model": "dagon_industry:block/refinery" },
+    "facing=south": { "model": "dagon_industry:block/refinery", "y": 180},
+    "facing=east": { "model": "dagon_industry:block/refinery", "y": 90},
+    "facing=west": { "model": "dagon_industry:block/refinery", "y": 270}
+  }
+}

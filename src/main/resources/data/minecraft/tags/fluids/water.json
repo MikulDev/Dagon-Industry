@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values":
+  [
+    "dagon_industry:oil_fluid",
+    "dagon_industry:oil_flowing",
+    "dagon_industry:gasoline_fluid",
+    "dagon_industry:gasoline_flowing"
+  ]
+}

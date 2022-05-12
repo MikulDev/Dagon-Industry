@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "   ",
+    " D ",
+    "SDS"
+  ],
+  "key":
+  {
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    },
+    "S":
+    {
+      "item": "dagon_industry:steel_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:refinery",
+    "count": 1
+  }
+}

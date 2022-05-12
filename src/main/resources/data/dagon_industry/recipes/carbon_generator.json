@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "   ",
+    "CDC",
+    "CIC"
+  ],
+  "key":
+  {
+    "C":
+    {
+      "item": "minecraft:coal_block"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:carbon_generator",
+    "count": 1
+  }
+}

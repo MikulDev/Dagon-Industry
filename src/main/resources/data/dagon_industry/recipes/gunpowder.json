@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "dagon_industry:sulfur_powder"
+    },
+    {
+      "item": "dagon_industry:sulfur_powder"
+    }
+  ],
+  "result":
+  {
+    "item": "minecraft:gunpowder",
+    "count": 1
+  }
+}

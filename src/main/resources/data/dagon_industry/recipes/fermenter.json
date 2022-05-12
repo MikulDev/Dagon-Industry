@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " S ",
+    " I ",
+    " S "
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "S":
+    {
+      "item": "dagon_industry:steel_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:fermenter",
+    "count": 1
+  }
+}

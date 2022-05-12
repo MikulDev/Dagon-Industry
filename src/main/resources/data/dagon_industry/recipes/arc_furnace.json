@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "SSS",
+    "SDS",
+    "SSS"
+  ],
+  "key":
+  {
+    "S":
+    {
+      "item": "dagon_industry:steel_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:fermenter",
+    "count": 1
+  }
+}
