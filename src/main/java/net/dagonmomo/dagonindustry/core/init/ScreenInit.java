@@ -24,5 +24,7 @@ public class ScreenInit
         ScreenManager.registerFactory(ContainerInit.PUMPJACK_CONTAINER.get(), PumpjackScreen::new);
         ScreenManager.registerFactory(ContainerInit.DIESEL_GENERATOR_CONTAINER.get(), DieselGeneratorScreen::new);
         ScreenManager.registerFactory(ContainerInit.REFINERY_CONTAINER.get(), RefineryScreen::new);
+        ScreenManager.registerFactory(ContainerInit.WORKBENCH_CONTAINER.get(), WorkbenchScreen::new);
+        ScreenManager.registerFactory(ContainerInit.AMMO_BENCH_CONTAINER.get(), AmmoBenchScreen::new);
     }
 }

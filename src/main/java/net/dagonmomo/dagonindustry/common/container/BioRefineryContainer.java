@@ -23,21 +23,28 @@ public class BioRefineryContainer extends AbstractMachineContainer
     {
         super(ContainerInit.BIO_REFINERY_CONTAINER.get(), windowId, te);
 
-        // Biomass Slots
-        for (int i = 0; i < 5; i++)
+        // Battery Slot
+        this.addSlot(new Slot(te, 0, 14, 28)
         {
-            this.addSlot(new Slot(te, i, 44 + i * 18, 28)
+            @Override
+            public boolean isItemValid(ItemStack stack)
             {
-                @Override
-                public boolean isItemValid(ItemStack stack)
-                {
-                    return stack.getItem() == ModItems.BIOMASS;
-                }
-            });
-        }
+                return stack.getItem() instanceof BatteryItem;
+            }
+        });
+
+        // Biomass Slot
+        this.addSlot(new Slot(te, 1, 80, 28)
+        {
+            @Override
+            public boolean isItemValid(ItemStack stack)
+            {
+                return stack.getItem() == ModItems.BIOMASS;
+            }
+        });
 
         // Bucket Slot
-        this.addSlot(new Slot(te, 5, 80, 62)
+        this.addSlot(new Slot(te, 2, 80, 62)
         {
             @Override
             public boolean isItemValid(ItemStack stack)
@@ -49,16 +56,6 @@ public class BioRefineryContainer extends AbstractMachineContainer
             public int getSlotStackLimit()
             {
                 return 1;
-            }
-        });
-
-        // Battery Slot
-        this.addSlot(new Slot(te, 6, 14, 28)
-        {
-            @Override
-            public boolean isItemValid(ItemStack stack)
-            {
-                return stack.getItem() instanceof BatteryItem;
             }
         });
 
@@ -115,44 +112,52 @@ public class BioRefineryContainer extends AbstractMachineContainer
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (DIMath.isBetween(index, 0, 3))
+            if (DIMath.isBetween(index, 0, 2))
             {
-                if (!this.mergeItemStack(itemstack1, 4, 40, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, true))
                 {
                     return ItemStack.EMPTY;
                 }
+
+                slot.onSlotChange(itemstack1, itemstack);
             }
             else
             {
                 if (itemstack.getItem() instanceof BatteryItem)
                 {
-                    if (!this.mergeItemStack(itemstack1, 0, 3, false))
+                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (AbstractFurnaceTileEntity.isFuel(itemstack))
+                else if (itemstack.getItem() == ModItems.BIOMASS)
                 {
-                    if (!this.mergeItemStack(itemstack1, 3, 4, false))
+                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 4, 30))
+                else if (itemstack.getItem() == Items.BUCKET)
                 {
-                    if (!this.mergeItemStack(itemstack1, 31, 40, false))
+                    if (!this.mergeItemStack(itemstack1, 2, 3, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 31, 40))
+                else if (index >= 3 && index < 30)
                 {
-                    if (!this.mergeItemStack(itemstack1, 4, 30, false))
+                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
                     {
-                        slot.onSlotChange(itemstack1, itemstack);
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (index >= 30 && index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+                {
+                    if (!this.mergeItemStack(itemstack1, 3, 30, false))
+                    {
                         return ItemStack.EMPTY;
                     }
                 }

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "IRI",
+    "IDI",
+    " I "
+  ],
+  "key":
+  {
+    "R":
+    {
+      "item": "minecraft:redstone_block"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:crude_battery",
+    "count": 1
+  }
+}

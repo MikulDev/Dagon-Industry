@@ -30,7 +30,8 @@ import java.util.List;
 public class BioRefineryTileEntity extends AbstractMultiblockTileEntity
 {
     public static final int SLOTS = 7;
-    public static int MAX_PROGRESS = 2400;
+    public static int MAX_PROGRESS = 120;
+    static int BIOMASS_NEEDED = 8;
 
     protected BioRefineryTileEntity(TileEntityType<?> typeIn)
     {
@@ -45,7 +46,10 @@ public class BioRefineryTileEntity extends AbstractMultiblockTileEntity
     @Override
     public List<BlockPos> getStructure(World world, Direction direction)
     {
-        return Arrays.asList();
+        return Arrays.asList(
+                new BlockPos(0, 1, 0),
+                new BlockPos(0, -1, 0)
+        );
     }
 
     @Override
@@ -85,61 +89,61 @@ public class BioRefineryTileEntity extends AbstractMultiblockTileEntity
 
         if (world != null && !world.isRemote)
         {
-            ItemStack battery = this.getItemInSlot(6);
-            if (this.hasBiomass() && battery.getItem() instanceof BatteryItem && BatteryItem.getCharge(battery) > 0)
+            if (this.ticksExisted % 20 == 0)
             {
-                if (this.getProgress() < MAX_PROGRESS)
+                ItemStack battery = this.getItemInSlot(0);
+                if (this.hasBiomass() && battery.getItem() instanceof BatteryItem && BatteryItem.getCharge(battery) > 0)
                 {
-                    this.getTileData().putBoolean("active", true);
-                    this.setProgress(this.getProgress() + 1);
-
-                    if (this.ticksExisted % 20 == 0)
+                    if (this.getProgress() < MAX_PROGRESS)
                     {
+                        this.getTileData().putBoolean("active", true);
+                        this.setProgress(this.getProgress() + 1);
+
                         BatteryItem.setCharge(battery, BatteryItem.getCharge(battery) - 1);
+                    }
+                    else
+                    {
+                        this.getTileData().putBoolean("active", false);
+                    }
+
+                    if (this.getProgress() >= MAX_PROGRESS && this.getItemInSlot(2).getItem() == Items.BUCKET)
+                    {
+                        // Produce biodiesel/biogas
+                        if (Math.random() < 0.2)
+                            this.setItemInSlot(2, new ItemStack(ItemInit.BIOGAS_BUCKET.get()));
+                        else
+                            this.setItemInSlot(2, new ItemStack(ItemInit.BIODIESEL_BUCKET.get()));
+
+                        // Drain biomass
+                        ItemStack biomass = inventory.get(1);
+                        if (biomass.getCount() >= BIOMASS_NEEDED)
+                        {
+                            biomass.shrink(BIOMASS_NEEDED);
+                        }
+
+                        this.setProgress(0);
                     }
                 }
                 else
                 {
                     this.getTileData().putBoolean("active", false);
                 }
-
-                if (this.getProgress() >= MAX_PROGRESS && this.getItemInSlot(5).getItem() == Items.BUCKET)
-                {
-                    // Produce biodiesel/biogas
-                    if (Math.random() < 0.2)
-                        this.setItemInSlot(5, new ItemStack(ItemInit.BIOGAS_BUCKET.get()));
-                    else
-                        this.setItemInSlot(5, new ItemStack(ItemInit.BIODIESEL_BUCKET.get()));
-
-                    // Drain biomass
-                    int itemsToRemove = 5;
-                    for (ItemStack stack : this.getItems().stream().limit(5).toArray(ItemStack[]::new))
-                    {
-                        if (stack.getCount() >= itemsToRemove)
-                        {
-                            stack.shrink(itemsToRemove);
-                            break;
-                        }
-                        else
-                        {
-                            itemsToRemove -= stack.getCount();
-                            stack.shrink(stack.getCount());
-                        }
-                    }
-
-                    this.setProgress(0);
-                }
-            }
-            else
-            {
-                this.getTileData().putBoolean("active", false);
             }
         }
     }
 
     public boolean hasBiomass()
     {
-        return this.getItems().stream().limit(5).anyMatch(stack -> stack.getItem() == ModItems.BIOMASS);
+        int itemsNeeded = BIOMASS_NEEDED;
+        for (ItemStack itemStack : this.getItems().stream().limit(5).toArray(ItemStack[]::new))
+        {
+            if (itemStack.getItem() == ModItems.BIOMASS)
+            {
+                itemsNeeded -= itemStack.getCount();
+                if (itemsNeeded <= 0) return true;
+            }
+        }
+        return false;
     }
 
     public LazyOptional<IItemHandler> getCap()

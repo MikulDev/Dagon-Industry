@@ -1,6 +1,9 @@
 {
   "variants":
   {
-    "": { "model": "dagon_industry:block/carbon_generator" }
+    "facing=north": { "model": "dagon_industry:block/carbon_generator" },
+    "facing=south": { "model": "dagon_industry:block/carbon_generator", "y": 180},
+    "facing=east": { "model": "dagon_industry:block/carbon_generator", "y": 90},
+    "facing=west": { "model": "dagon_industry:block/carbon_generator", "y": 270}
   }
 }

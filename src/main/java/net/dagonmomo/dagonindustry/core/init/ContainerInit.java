@@ -44,4 +44,10 @@ public class ContainerInit
 
     public static final RegistryObject<ContainerType<RefineryContainer>> REFINERY_CONTAINER =
             CONTAINERS.register("refinery", () -> IForgeContainerType.create(RefineryContainer::new));
+
+    public static final RegistryObject<ContainerType<WorkbenchContainer>> WORKBENCH_CONTAINER =
+            CONTAINERS.register("workbench", () -> IForgeContainerType.create(WorkbenchContainer::new));
+
+    public static final RegistryObject<ContainerType<AmmoBenchContainer>> AMMO_BENCH_CONTAINER =
+            CONTAINERS.register("ammo_bench", () -> IForgeContainerType.create(AmmoBenchContainer::new));
 }

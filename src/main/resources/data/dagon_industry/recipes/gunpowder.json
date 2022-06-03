@@ -5,10 +5,28 @@
       "item": "minecraft:coal"
     },
     {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
       "item": "dagon_industry:sulfur_powder"
     },
     {
       "item": "dagon_industry:sulfur_powder"
+    },
+    {
+      "item": "dagon_industry:sulfur_powder"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:redstone"
     }
   ],
   "result":

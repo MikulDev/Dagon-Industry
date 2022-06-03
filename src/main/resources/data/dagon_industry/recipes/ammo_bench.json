@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "I  ",
+    "CII",
+    "D D"
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    },
+    "C":
+    {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:ammo_bench",
+    "count": 1
+  }
+}

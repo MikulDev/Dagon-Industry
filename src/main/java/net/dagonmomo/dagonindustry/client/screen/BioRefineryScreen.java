@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class BioRefineryScreen extends ContainerScreen<BioRefineryContainer>
+public class  BioRefineryScreen extends ContainerScreen<BioRefineryContainer>
 {
     private static final ResourceLocation TEXTURE = new ResourceLocation("dagon_industry:textures/gui/bio_refinery.png");
 
@@ -40,25 +40,22 @@ public class BioRefineryScreen extends ContainerScreen<BioRefineryContainer>
         mc.getTextureManager().bindTexture(TEXTURE);
         this.blit(matrixStack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
-        // Render no item in biofuel slots
-        for (int i = 0; i < 5; i++)
+        // Render no item in biomass slot
+        if (this.container.te.getStackInSlot(1).isEmpty())
         {
-            if (this.container.te.getStackInSlot(i).isEmpty())
-            {
-                mc.getTextureManager().bindTexture(TEXTURE);
-                this.blit(matrixStack, this.guiLeft + 44 + 18 * i, this.guiTop + 28, 176, 30, 16, 16);
-            }
+            mc.getTextureManager().bindTexture(TEXTURE);
+            this.blit(matrixStack, this.guiLeft + 80, this.guiTop + 28, 176, 30, 16, 16);
         }
 
         // Render no item in bucket slot
-        if (this.container.te.getStackInSlot(5).isEmpty())
+        if (this.container.te.getStackInSlot(6).isEmpty())
         {
             mc.getTextureManager().bindTexture(TEXTURE);
             this.blit(matrixStack, this.guiLeft + 80, this.guiTop + 62, 176, 46, 16, 16);
         }
 
         // Render no item in battery slot
-        if (this.container.te.getStackInSlot(6).isEmpty())
+        if (this.container.te.getStackInSlot(0).isEmpty())
         {
             mc.getTextureManager().bindTexture(TEXTURE);
             this.blit(matrixStack, this.guiLeft + 14, this.guiTop + 28, 176, 0, 16, 16);

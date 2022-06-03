@@ -43,10 +43,11 @@ public class LatheTileEntity extends AbstractMultiblockTileEntity
     @Override
     public List<BlockPos> getStructure(World world, Direction direction)
     {
+        Direction sideways = direction.rotateY();
         return Arrays.asList(
-                new BlockPos(direction.getXOffset(), 0, direction.getZOffset()),
-                new BlockPos(direction.getOpposite().getXOffset(), 0, direction.getOpposite().getZOffset()),
-                new BlockPos(direction.getXOffset(), 1, direction.getZOffset())
+                new BlockPos(sideways.getXOffset(), 0, sideways.getZOffset()),
+                new BlockPos(sideways.getOpposite().getXOffset(), 0, sideways.getOpposite().getZOffset()),
+                new BlockPos(sideways.getXOffset(), 1, sideways.getZOffset())
         );
     }
 

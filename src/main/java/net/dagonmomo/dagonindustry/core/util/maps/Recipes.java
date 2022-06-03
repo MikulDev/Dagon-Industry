@@ -29,7 +29,8 @@ public class Recipes
     public static final Map<Item, Integer> FUEL_BURN_TIMES = new HashMap<>();
     public static final Map<Item, Triple<List<Item>, Item, Double>> REFINING = new HashMap<>();
     public static final Map<Pair<List<Item>, Integer>, Item> WELDING = new HashMap<>();
-    public static final Map<Pair<List<ItemStack>, Integer>, Item> WORKBENCH = new HashMap<>();
+    public static final Map<Pair<List<ItemStack>, Integer>, ItemStack> WORKBENCH = new HashMap<>();
+    public static final Map<Triple<ItemStack, ItemStack, ItemStack>, ItemStack> BALLISTICS = new HashMap<>();
 
     @SubscribeEvent
     public static void setupRecipes(FMLCommonSetupEvent event)
@@ -51,7 +52,7 @@ public class Recipes
 
         // Arc Furnace
         ARC_ALLOYS.put(new Triple<>(new ItemStack(Items.IRON_INGOT, 1), new ItemStack(Items.COAL, 2), 0.1), new ItemStack(ModItems.STEEL_INGOT, 1));
-        ARC_ALLOYS.put(new Triple<>(new ItemStack(ItemInit.COBALT_ORE.get(), 1), ItemStack.EMPTY, 0.2),     new ItemStack(ModItems.COBALT_INGOT, 1));
+        ARC_ALLOYS.put(new Triple<>(new ItemStack(ItemInit.COBALT_ORE.get(), 1), ItemStack.EMPTY, 0.2),     new ItemStack(ModItems.COBALT_PLATE, 1));
 
         // Crusher
         CRUSHING.put(Items.IRON_INGOT, Pair.of(Items.IRON_NUGGET, 12));
@@ -60,7 +61,7 @@ public class Recipes
 
         // Lathing
         LATHING.put(Items.IRON_INGOT, ItemInit.IRON_ROD.get());
-        LATHING.put(ItemInit.COBALT_INGOT.get(), ItemInit.COBALT_ROD.get());
+        LATHING.put(ItemInit.COBALT_PLATE.get(), ItemInit.COBALT_ROD.get());
         LATHING.put(ItemInit.STEEL_INGOT.get(), ItemInit.STEEL_ROD.get());
         LATHING.put(Items.NETHERITE_INGOT, ItemInit.NETHERITE_ROD.get());
 
@@ -76,6 +77,31 @@ public class Recipes
         // Workbench
         WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 15),
                                             new ItemStack(ItemInit.STEEL_ROD.get(), 5),
-                                            new ItemStack(ItemInit.COBALT_INGOT.get(), 2)), 5), ModItems.COBALT_PLATE);
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 2)), 300), new ItemStack(ItemInit.CRUDE_PISTOL.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 10),
+                                            new ItemStack(ItemInit.STEEL_ROD.get(), 10),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 4)), 300), new ItemStack(ItemInit.CRUDE_RIFLE.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 20),
+                                            new ItemStack(ItemInit.STEEL_ROD.get(), 5),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 5)), 300), new ItemStack(ItemInit.CRUDE_SNIPER.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 5),
+                                            new ItemStack(ItemInit.STEEL_ROD.get(), 20),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 4)), 300), new ItemStack(ItemInit.CRUDE_SHOTGUN.get(), 1));
+
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 20),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 5)), 300), new ItemStack(ItemInit.STEEL_PICKAXE.get(), 1));
+
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 10),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 2)), 300), new ItemStack(ItemInit.STEEL_HELMET.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 16),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 4)), 300), new ItemStack(ItemInit.STEEL_CHESTPLATE.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 14),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 3)), 300), new ItemStack(ItemInit.STEEL_LEGGINGS.get(), 1));
+        WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 8),
+                                            new ItemStack(ItemInit.COBALT_PLATE.get(), 2)), 300), new ItemStack(ItemInit.STEEL_BOOTS.get(), 1));
+
+        // Ammo Bench
+        BALLISTICS.put(new Triple<>(new ItemStack(Items.GUNPOWDER, 1), new ItemStack(ItemInit.IRON_PLATE.get(), 1), new ItemStack(ItemInit.IRON_ROD.get(), 1)),
+                       new ItemStack(com.mrcrayfish.guns.init.ModItems.BASIC_BULLET.get(), 10));
     }
 }

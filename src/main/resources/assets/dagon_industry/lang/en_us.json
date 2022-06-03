@@ -16,6 +16,8 @@
   "block.dagon_industry.pumpjack":          "Pumpjack",
   "block.dagon_industry.diesel_generator":  "Diesel Generator",
   "block.dagon_industry.refinery":          "Refinery",
+  "block.dagon_industry.workbench":         "Workbench",
+  "block.dagon_industry.ammo_bench":        "Ammo Bench",
 
   "item.dagon_industry.crude_battery":    "Crude Battery",
   "item.dagon_industry.diesel_battery":   "Diesel Battery",
@@ -37,10 +39,20 @@
   "item.dagon_industry.biogas_bucket":    "Biogas Bucket",
   "item.dagon_industry.propane_bucket":   "Propane Bucket",
   "item.dagon_industry.gasoline_bucket":  "Gasoline Bucket",
-  "item.dagon_guns.crude_pistol":         "Crude Pistol",
-  "item.dagon_guns.crude_rifle":          "Crude Rifle",
-  "item.dagon_guns.crude_sniper":         "Crude Sniper",
-  "item.dagon_guns.crude_shotgun":        "Crude Shotgun",
+  "item.dagon_industry.crude_pistol":     "Crude Pistol",
+  "item.dagon_industry.crude_rifle":      "Crude Rifle",
+  "item.dagon_industry.crude_sniper":     "Crude Sniper",
+  "item.dagon_industry.crude_shotgun":    "Crude Shotgun",
+  "item.dagon_industry.steel_pickaxe":    "Steel Pickaxe",
+  "item.dagon_industry.steel_axe":        "Steel Axe",
+  "item.dagon_industry.steel_shovel":     "Steel Shovel",
+  "item.dagon_industry.steel_sword":      "Steel Sword",
+  "item.dagon_industry.steel_helmet":     "Steel Helmet",
+  "item.dagon_industry.steel_chestplate": "Steel Chestplate",
+  "item.dagon_industry.steel_leggings":   "Steel Leggings",
+  "item.dagon_industry.steel_boots":      "Steel Boots",
+  "item.dagon_industry.iron_rod":         "Iron Rod",
+  "item.dagon_industry.netherite_rod":    "Netherite Rod",
 
   "container.dagon_industry.steamhammer":       "Steamhammer",
   "container.dagon_industry.carbon_generator":  "Carbon Generator",
@@ -52,5 +64,7 @@
   "container.dagon_industry.lathe":             "Lathe",
   "container.dagon_industry.pumpjack":          "Pumpjack",
   "container.dagon_industry.diesel_generator":  "Diesel Generator",
-  "container.dagon_industry.refinery":          "Refinery"
+  "container.dagon_industry.refinery":          "Refinery",
+  "container.dagon_industry.workbench":         "Workbench",
+  "container.dagon_industry.ammo_bench":        "Ammo Bench"
 }

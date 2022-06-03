@@ -98,7 +98,7 @@ public class CarbonGeneratorContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 3))
             {
-                if (!this.mergeItemStack(itemstack1, 4, 40, true))
+                if (!this.mergeItemStack(itemstack1, 4, 40, false))
                 {
                     return ItemStack.EMPTY;
                 }

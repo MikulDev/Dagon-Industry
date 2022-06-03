@@ -124,24 +124,18 @@ public class ArcFurnaceContainer extends AbstractMachineContainer
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (DIMath.isBetween(index, 0, 3))
+            if (DIMath.isBetween(index, 0, 4))
             {
-                if (!this.mergeItemStack(itemstack1, 4, 40, true))
+                if (!this.mergeItemStack(itemstack1, 5, 41, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
             else
             {
-                if (itemstack.getItem() instanceof BatteryItem)
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        slot.onSlotChange(itemstack1, itemstack);
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (itemstack.getItem() == Items.IRON_INGOT)
+                if (Recipes.ARC_ALLOYS.keySet().stream().anyMatch(triple ->
+                                                triple.a.getItem() == itemstack1.getItem()
+                                                || triple.b.getItem() == itemstack1.getItem()))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
@@ -149,25 +143,25 @@ public class ArcFurnaceContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (itemstack.getItem() == Items.COAL)
+                else if (itemstack.getItem() instanceof BatteryItem)
                 {
-                    if (!this.mergeItemStack(itemstack1, 2, 3, false))
+                    if (!this.mergeItemStack(itemstack1, 0, 1, false) || !this.mergeItemStack(itemstack1, 2, 3, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 4, 30))
+                else if (DIMath.isBetween(index, 5, 31))
                 {
-                    if (!this.mergeItemStack(itemstack1, 31, 40, false))
+                    if (!this.mergeItemStack(itemstack1, 32, 41, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 31, 40))
+                else if (DIMath.isBetween(index, 32, 41))
                 {
-                    if (!this.mergeItemStack(itemstack1, 4, 30, false))
+                    if (!this.mergeItemStack(itemstack1, 5, 31, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;

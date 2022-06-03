@@ -22,7 +22,7 @@ public class FermenterContainer extends AbstractMachineContainer
         super(ContainerInit.FERMENTER_CONTAINER.get(), windowId, te);
 
         // Battery Slot
-        this.addSlot(new Slot(te, 6, 10, 35)
+        this.addSlot(new Slot(te, 0, 10, 35)
         {
             @Override
             public boolean isItemValid(ItemStack stack)
@@ -34,7 +34,7 @@ public class FermenterContainer extends AbstractMachineContainer
         // Input Slots
         for (int i = 0; i < 5; i++)
         {
-            this.addSlot(new Slot(te, i, 34 + 23 * i, 23)
+            this.addSlot(new Slot(te, i + 1, 34 + 23 * i, 23)
             {
                 @Override
                 public boolean isItemValid(ItemStack stack)
@@ -45,7 +45,7 @@ public class FermenterContainer extends AbstractMachineContainer
         }
 
         // Output Slot
-        this.addSlot(new Slot(te, 5, 80, 59)
+        this.addSlot(new Slot(te, 6, 80, 59)
         {
             @Override
             public boolean isItemValid(ItemStack stack)
@@ -109,7 +109,7 @@ public class FermenterContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 2))
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, false))
                 {
                     return ItemStack.EMPTY;
                 }

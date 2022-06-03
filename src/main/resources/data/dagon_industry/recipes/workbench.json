@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "   ",
+    "DCD",
+    "I I"
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    },
+    "C":
+    {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:workbench",
+    "count": 1
+  }
+}

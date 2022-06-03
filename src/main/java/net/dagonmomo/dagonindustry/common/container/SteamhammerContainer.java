@@ -106,7 +106,7 @@ public class SteamhammerContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 2))
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, false))
                 {
                     return ItemStack.EMPTY;
                 }

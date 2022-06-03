@@ -126,14 +126,16 @@ public class AlloyFurnaceContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 4))
             {
-                if (!this.mergeItemStack(itemstack1, 5, 41, true))
+                if (!this.mergeItemStack(itemstack1, 5, 41, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
             else
             {
-                if (itemstack.getItem() == Items.IRON_INGOT)
+                if (Recipes.ALLOYS.keySet().stream().anyMatch(pair ->
+                                            pair.getFirst().getItem() == itemstack1.getItem()
+                                            || pair.getSecond().getItem() == itemstack1.getItem()))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

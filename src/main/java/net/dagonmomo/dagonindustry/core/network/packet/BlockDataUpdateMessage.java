@@ -40,7 +40,7 @@ public class BlockDataUpdateMessage
                 TileEntity te = Minecraft.getInstance().world.getTileEntity(message.blockPos);
                 if (te != null)
                 {
-                    te.getTileData().merge(message.nbt);
+                    te.read(te.getWorld().getBlockState(message.blockPos), message.nbt);
                 }
             });
         }

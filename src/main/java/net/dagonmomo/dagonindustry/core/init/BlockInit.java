@@ -60,6 +60,10 @@ public class BlockInit
             new MachineBlock<>(() -> TileEntityInit.WORKBENCH.get(), Block.Properties.create(Material.IRON).hardnessAndResistance(2.0F, 3.0F)
                     .sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).notSolid()));
 
+    public static RegistryObject<Block> AMMO_BENCH = BLOCKS.register("ammo_bench", () ->
+            new MachineBlock<>(() -> TileEntityInit.AMMO_BENCH.get(), Block.Properties.create(Material.IRON).hardnessAndResistance(2.0F, 3.0F)
+                    .sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).notSolid()));
+
     public static RegistryObject<Block> MULTIBLOCK = BLOCKS.register("multiblock", () ->
             new Multiblock(Block.Properties.create(Material.IRON).hardnessAndResistance(2, 3)
                                           .sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).notSolid()));

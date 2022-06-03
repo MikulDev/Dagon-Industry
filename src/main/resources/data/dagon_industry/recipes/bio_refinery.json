@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "DGD",
+    "IGI",
+    "IDI"
+  ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond_block"
+    },
+    "G":
+    {
+      "item": "minecraft:glass"
+    }
+  },
+  "result":
+  {
+    "item": "dagon_industry:bio_refinery",
+    "count": 1
+  }
+}

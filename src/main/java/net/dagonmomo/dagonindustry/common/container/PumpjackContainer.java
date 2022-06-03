@@ -104,9 +104,9 @@ public class PumpjackContainer extends AbstractMachineContainer
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (DIMath.isBetween(index, 0, 2))
+            if (DIMath.isBetween(index, 0, 5))
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 6, 33, false))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -121,25 +121,25 @@ public class PumpjackContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (Tags.Items.INGOTS.contains(itemstack.getItem()))
+                else if (itemstack.getItem() == Items.BUCKET)
                 {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
+                    if (!this.mergeItemStack(itemstack1, 1, 6, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 3, 29))
+                else if (DIMath.isBetween(index, 6, 32))
                 {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
+                    if (!this.mergeItemStack(itemstack1, 33, 42, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 30, 39))
+                else if (DIMath.isBetween(index, 33, 41))
                 {
-                    if (!this.mergeItemStack(itemstack1, 3, 29, false))
+                    if (!this.mergeItemStack(itemstack1, 6, 32, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;

@@ -2,6 +2,7 @@ package net.dagonmomo.dagonindustry.common.te;
 
 import net.dagonmomo.dagonindustry.common.container.FermenterContainer;
 import net.dagonmomo.dagonindustry.common.item.BatteryItem;
+import net.dagonmomo.dagonindustry.core.util.DIMath;
 import net.dagonmomo.dagonindustry.core.util.registries.ModItems;
 import net.dagonmomo.dagonindustry.core.util.registries.ModTileEntities;
 import net.minecraft.block.BlockState;
@@ -90,7 +91,7 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
     public void tick()
     {
         super.tick();
-        ItemStack batteryItem = this.getItemInSlot(6);
+        ItemStack batteryItem = this.getItemInSlot(0);
         boolean hasBattery = batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0;
 
         if (world != null && !world.isRemote)
@@ -98,11 +99,11 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
             if (this.ticksExisted % 5 == 0)
             {
                 shouldUseBattery = false;
-                ItemStack output = this.getItemInSlot(5);
+                ItemStack output = this.getItemInSlot(6);
                 int fermentFactor = hasBattery ? 5 : 1;
                 int outputCount = 0;
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 1; i < 6; i++)
                 {
                     ItemStack stack = this.getItemInSlot(i);
                     if (!stack.isEmpty() && isFermentableItem(stack))
@@ -128,7 +129,7 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
                 }
 
                 if (output.isEmpty())
-                    this.setItemInSlot(5, new ItemStack(ModItems.BIOMASS, outputCount));
+                    this.setItemInSlot(6, new ItemStack(ModItems.BIOMASS, outputCount));
                 else
                     output.grow(outputCount);
 
@@ -162,14 +163,14 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
 
     public int getProgress(int slot)
     {
-        if (slot < 0 || slot >= SLOTS) return 0;
+        if (!DIMath.isBetween(slot, 1, 5)) return 0;
 
         return this.getTileData().getInt("progress_" + slot);
     }
 
     public void setProgress(int slot, int progress)
     {
-        if (slot < 0 || slot >= SLOTS - 2) return;
+        if (!DIMath.isBetween(slot, 1, 5)) return;
 
         this.getTileData().putInt("progress_" + slot, progress);
     }
@@ -178,7 +179,7 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
     public void read(BlockState state, CompoundNBT nbt)
     {
         super.read(state, nbt);
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
             this.setProgress(i, nbt.getInt("progress_" + i));
         }
@@ -190,7 +191,7 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
     public CompoundNBT write(CompoundNBT compound)
     {
         super.write(compound);
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
             compound.putInt("progress_" + i, this.getProgress(i));
         }

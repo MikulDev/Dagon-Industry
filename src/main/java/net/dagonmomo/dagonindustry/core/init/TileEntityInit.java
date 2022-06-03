@@ -52,12 +52,6 @@ public class TileEntityInit
     public static RegistryObject<TileEntityType<WorkbenchTileEntity>> WORKBENCH = TILE_ENTITIES.register("workbench", () ->
             TileEntityType.Builder.create(WorkbenchTileEntity::new, BlockInit.WORKBENCH.get()).build(null));
 
-    /*public static RegistryObject<TileEntityType<FermenterTileEntity>> DIESEL_GENERATOR = TILE_ENTITIES.register("diesel_generator", () ->
-            TileEntityType.Builder.create(FermenterTileEntity::new, BlockInit.FERMENTER).build(null));*/
-
-    /*public static RegistryObject<TileEntityType<FermenterTileEntity>> DIESEL_REFINERY = TILE_ENTITIES.register("diesel_refinery", () ->
-            TileEntityType.Builder.create(FermenterTileEntity::new, BlockInit.FERMENTER).build(null));
-
-    public static RegistryObject<TileEntityType<FermenterTileEntity>> GAS_REFINERY = TILE_ENTITIES.register("gas_refinery", () ->
-            TileEntityType.Builder.create(FermenterTileEntity::new, BlockInit.FERMENTER).build(null));*/
+    public static RegistryObject<TileEntityType<AmmoBenchTileEntity>> AMMO_BENCH = TILE_ENTITIES.register("ammo_bench", () ->
+            TileEntityType.Builder.create(AmmoBenchTileEntity::new, BlockInit.AMMO_BENCH.get()).build(null));
 }

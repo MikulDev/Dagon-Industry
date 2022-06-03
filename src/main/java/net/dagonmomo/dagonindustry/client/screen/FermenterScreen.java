@@ -41,24 +41,24 @@ public class FermenterScreen extends ContainerScreen<FermenterContainer>
         this.blit(matrixStack, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
         // Render progress bar
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
             int progress = te.getProgress(i);
-            this.blit(matrixStack, this.guiLeft + 34 + 23 * i, this.guiTop + 44, 176, 0, (int) (progress / Math.max(0.01, FermenterTileEntity.MAX_PROGRESS / 16d)), 4);
+            this.blit(matrixStack, this.guiLeft + 11 + 23 * i, this.guiTop + 44, 176, 0, (int) (progress / Math.max(0.01, FermenterTileEntity.MAX_PROGRESS / 16d)), 4);
         }
 
         // Render no item in battery slot
-        if (this.container.te.getStackInSlot(6).isEmpty())
+        if (this.container.te.getStackInSlot(0).isEmpty())
         {
             this.blit(matrixStack, this.guiLeft + 10, this.guiTop + 35, 176, 20, 16, 16);
         }
 
         // Render no item in fermenting slots
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
             if (this.container.te.getStackInSlot(i).isEmpty())
             {
-                this.blit(matrixStack, this.guiLeft + 34 + 23 * i, this.guiTop + 23, 176, 4, 16, 16);
+                this.blit(matrixStack, this.guiLeft + 11 + 23 * i, this.guiTop + 23, 176, 4, 16, 16);
             }
         }
 

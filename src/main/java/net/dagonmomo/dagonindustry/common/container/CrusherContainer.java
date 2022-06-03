@@ -4,6 +4,7 @@ import net.dagonmomo.dagonindustry.common.item.BatteryItem;
 import net.dagonmomo.dagonindustry.common.te.CrusherTileEntity;
 import net.dagonmomo.dagonindustry.core.init.ContainerInit;
 import net.dagonmomo.dagonindustry.core.util.DIMath;
+import net.dagonmomo.dagonindustry.core.util.maps.Recipes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -98,7 +99,7 @@ public class CrusherContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 2))
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, false))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -113,7 +114,7 @@ public class CrusherContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (Tags.Items.INGOTS.contains(itemstack.getItem()))
+                else if (Recipes.CRUSHING.keySet().stream().anyMatch(item -> item == itemstack1.getItem()))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
@@ -129,7 +130,7 @@ public class CrusherContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 30, 39))
+                else if (DIMath.isBetween(index, 30, 38))
                 {
                     if (!this.mergeItemStack(itemstack1, 3, 29, false))
                     {

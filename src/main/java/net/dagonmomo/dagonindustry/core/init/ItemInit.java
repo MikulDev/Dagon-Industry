@@ -1,9 +1,11 @@
 package net.dagonmomo.dagonindustry.core.init;
 
+import com.mrcrayfish.guns.item.GunItem;
 import net.dagonmomo.dagonindustry.DagonIndustry;
 import net.dagonmomo.dagonindustry.common.item.*;
 import net.dagonmomo.dagonindustry.common.te.*;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.fml.RegistryObject;
@@ -35,17 +37,33 @@ public class ItemInit
     public static final RegistryObject<Item> STEEL_ROD = ITEMS.register("steel_rod", () -> new MetalRodItem(STEEL_INGOT.get()));
     public static final RegistryObject<Item> COBALT_ROD = ITEMS.register("cobalt_rod", () -> new MetalRodItem(COBALT_INGOT.get()));
 
-    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword", () -> new SwordItem(new SteelItemTier(), 3, -2F, new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).maxDamage(500)));
-    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe", () -> new AxeItem(new SteelItemTier(), 6F, -2.9F, new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
-    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel", () -> new ShovelItem(new SteelItemTier(), 1.5F, -2F, new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
-    public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe", () -> new PickaxeItem(new SteelItemTier(), 1, -2.2F, new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
-    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe", () -> new HoeItem(new SteelItemTier(), -2, 0F, new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
+    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword", () -> new SwordItem(new SteelItemTier(), 3, -2F,
+                                                           new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).maxDamage(500)));
+    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe", () -> new AxeItem(new SteelItemTier(), 6F, -2.9F,
+                                                         new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
+    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel", () -> new ShovelItem(new SteelItemTier(), 1.5F, -2F,
+                                                            new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
+    public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe", () -> new PickaxeItem(new SteelItemTier(), 1, -2.2F,
+                                                             new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
+    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe", () -> new HoeItem(new SteelItemTier(), -2, 0F,
+                                                         new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).maxDamage(500)));
+
+    public static final RegistryObject<Item> STEEL_HELMET     =  ITEMS.register("steel_helmet", () -> new ArmorItem(
+            ModArmors.STEEL_ARMOR, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> STEEL_CHESTPLATE =  ITEMS.register("steel_chestplate", () -> new ArmorItem(
+            ModArmors.STEEL_ARMOR, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> STEEL_LEGGINGS   =  ITEMS.register("steel_leggings", () -> new ArmorItem(
+            ModArmors.STEEL_ARMOR, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> STEEL_BOOTS      =  ITEMS.register("steel_boots", () -> new ArmorItem(
+            ModArmors.STEEL_ARMOR, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+
+
 
     // Gun Items
-    public static RegistryObject<Item> PISTOL = ITEMS.register("crude_pistol", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
-    public static RegistryObject<Item> RIFLE = ITEMS.register("crude_rifle", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
-    public static RegistryObject<Item> SNIPER = ITEMS.register("crude_sniper", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
-    public static RegistryObject<Item> SHOTGUN = ITEMS.register("crude_shotgun", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
+    public static RegistryObject<Item> CRUDE_PISTOL = ITEMS.register("crude_pistol", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
+    public static RegistryObject<Item> CRUDE_RIFLE = ITEMS.register("crude_rifle", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
+    public static RegistryObject<Item> CRUDE_SNIPER = ITEMS.register("crude_sniper", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
+    public static RegistryObject<Item> CRUDE_SHOTGUN = ITEMS.register("crude_shotgun", () -> new GunItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1)));
 
     // Block Items
     public static final RegistryObject<Item> STEAMHAMMER = ITEMS.register("steamhammer", () ->
@@ -69,11 +87,12 @@ public class ItemInit
                                (world, direction) -> new ArcFurnaceTileEntity().getStructure(world, direction), new Vector3i(0, 1, 0)));
 
     public static final RegistryObject<Item> BIO_REFINERY = ITEMS.register("bio_refinery", () ->
-            new BlockItem(BlockInit.BIO_REFINERY.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+            new OffsetBlockItem(BlockInit.BIO_REFINERY.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
+                               (world, direction) -> new BioRefineryTileEntity().getStructure(world, direction), new Vector3i(0, 1, 0)));
 
     public static final RegistryObject<Item> CRUSHER = ITEMS.register("crusher", () ->
             new MultiblockItem(BlockInit.CRUSHER.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
-                                (world, direction) -> new CrusherTileEntity().getStructure(world, direction)));
+                               (world, direction) -> new CrusherTileEntity().getStructure(world, direction)));
 
     public static final RegistryObject<Item> LATHE = ITEMS.register("lathe", () ->
             new MultiblockItem(BlockInit.LATHE.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
@@ -90,6 +109,14 @@ public class ItemInit
     public static final RegistryObject<Item> REFINERY = ITEMS.register("refinery", () ->
             new OffsetBlockItem(BlockInit.REFINERY.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
                                 (world, direction) -> new RefineryTileEntity().getStructure(world, direction), new Vector3i(0, 1, 0)));
+
+    public static final RegistryObject<Item> WORKBENCH = ITEMS.register("workbench", () ->
+            new OffsetBlockItem(BlockInit.WORKBENCH.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
+                                (world, direction) -> new WorkbenchTileEntity().getStructure(world, direction), new Vector3i(0, 1, 0)));
+
+    public static final RegistryObject<Item> AMMO_BENCH = ITEMS.register("ammo_bench", () ->
+            new MultiblockItem(BlockInit.AMMO_BENCH.get(), new Item.Properties().group(ItemGroup.DECORATIONS),
+                                (world, direction) -> new AmmoBenchTileEntity().getStructure(world, direction)));
 
     // Normal blocks
     public static final RegistryObject<Item> STEEL_BLOCK = ITEMS.register("steel_block", () ->

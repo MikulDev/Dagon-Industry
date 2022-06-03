@@ -72,14 +72,7 @@ public class RefineryContainer extends AbstractMachineContainer
         {
             for (int col = 0; col < 9; col++)
             {
-                addSlot(new Slot(playerInv, col + (9 * row) + 9, xStart + col * 18, yStart + (row * 18))
-                {
-                    @Override
-                    public boolean isItemValid(ItemStack stack)
-                    {
-                        return false;
-                    }
-                });
+                addSlot(new Slot(playerInv, col + (9 * row) + 9, xStart + col * 18, yStart + (row * 18)));
             }
         }
 
@@ -126,7 +119,7 @@ public class RefineryContainer extends AbstractMachineContainer
 
             if (DIMath.isBetween(index, 0, 2))
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, false))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -141,7 +134,7 @@ public class RefineryContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (Tags.Items.INGOTS.contains(itemstack.getItem()))
+                else if (Recipes.REFINING.keySet().stream().anyMatch(item -> item == itemstack1.getItem()))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {
@@ -149,17 +142,25 @@ public class RefineryContainer extends AbstractMachineContainer
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 3, 29))
+                else if (itemstack1.getItem() == Items.BUCKET)
                 {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
+                    if (!this.mergeItemStack(itemstack1, 2, 5, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (DIMath.isBetween(index, 30, 39))
+                else if (DIMath.isBetween(index, 6, 32))
                 {
-                    if (!this.mergeItemStack(itemstack1, 3, 29, false))
+                    if (!this.mergeItemStack(itemstack1, 33, 42, false))
+                    {
+                        slot.onSlotChange(itemstack1, itemstack);
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (DIMath.isBetween(index, 33, 41))
+                {
+                    if (!this.mergeItemStack(itemstack1, 6, 33, false))
                     {
                         slot.onSlotChange(itemstack1, itemstack);
                         return ItemStack.EMPTY;

@@ -2,6 +2,7 @@ package net.dagonmomo.dagonindustry.common.item;
 
 import net.dagonmomo.dagonindustry.core.util.registries.ModItems;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
 public class SteelItemTier implements IItemTier
@@ -13,7 +14,7 @@ public class SteelItemTier implements IItemTier
 
     @Override
     public float getEfficiency() {
-        return 7f;
+        return 9.0F;
     }
 
     @Override
@@ -23,7 +24,7 @@ public class SteelItemTier implements IItemTier
 
     @Override
     public int getHarvestLevel() {
-        return 2;
+        return 4;
     }
 
     @Override
@@ -32,7 +33,8 @@ public class SteelItemTier implements IItemTier
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        return Ingredient.fromItems(ModItems.STEEL_INGOT);
+    public Ingredient getRepairMaterial()
+    {
+        return Ingredient.fromItems(ModItems.STEEL_PLATE, ModItems.COBALT_PLATE);
     }
 }
