@@ -99,14 +99,20 @@ public class RefineryTileEntity extends AbstractMultiblockTileEntity
             if (Recipes.REFINING.containsKey(inputItem.getItem())
             && batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0)
             {
+                // Get the recipe associated with the input item
                 Triple<List<Item>, Item, Double> recipe = Recipes.REFINING.get(inputItem.getItem());
+                // Get the list of items to output
                 List<Item> outputItems = recipe.a;
+                // Get the items that are currently in the output slots
                 List<ItemStack> stacksInOutput = this.inventory.subList(2, 5);
 
+                // If the items in the output slots are all buckets, then we can start the process
                 if (stacksInOutput.stream().allMatch(stack -> stack.getItem() == Items.BUCKET))
                 {
+                    // Mark this TE as making progress (used for GUI)
                     this.getTileData().putBoolean("active", true);
 
+                    // Drain battery
                     if (this.ticksExisted % 20 == 0)
                     {
                         BatteryItem.setCharge(batteryItem, BatteryItem.getCharge(batteryItem) - 1);
@@ -114,14 +120,18 @@ public class RefineryTileEntity extends AbstractMultiblockTileEntity
 
                     this.setProgress(this.getProgress() + 1);
 
+                    // If progress is complete, output the items and reset
                     if (this.getProgress() >= MAX_PROGRESS)
                     {
+                        // Drain the input item, leaving its bucket behind
                         this.setItemInSlot(1, inputItem.getContainerItem());
 
+                        // Upon recipe failure, output the failure item
                         if (Math.random() < recipe.c)
                         {
                             this.setItemInSlot(5, recipe.b.getDefaultInstance());
                         }
+                        // Otherwise, output the items
                         else
                         {
                             for (int i = 0; i < 3; i++)
@@ -132,6 +142,7 @@ public class RefineryTileEntity extends AbstractMultiblockTileEntity
                         this.setProgress(0);
                     }
                 }
+                // If conditions for crafting suddenly become invalid, drain progress
                 else
                 {
                     if (this.getProgress() > 0)
@@ -139,6 +150,7 @@ public class RefineryTileEntity extends AbstractMultiblockTileEntity
                     this.getTileData().putBoolean("active", false);
                 }
             }
+            // If conditions for crafting suddenly become invalid, drain progress
             else
             {
                 if (this.getProgress() > 0)

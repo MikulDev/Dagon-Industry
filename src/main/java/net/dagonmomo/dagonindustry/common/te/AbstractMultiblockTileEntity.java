@@ -26,6 +26,10 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains all the basic code necessary for a multi-block TileEntity.<br>
+ * This class should probably be extended even if the TE is not multiple blocks.
+ */
 public abstract class AbstractMultiblockTileEntity extends LockableLootTileEntity implements ITickableTileEntity
 {
     NonNullList<ItemStack> inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
@@ -52,6 +56,12 @@ public abstract class AbstractMultiblockTileEntity extends LockableLootTileEntit
     @Override
     public abstract int getSizeInventory();
 
+    /**
+     * Defines a list of positions that make up the TE's structure.
+     * @param world The world the TE is in.
+     * @param direction The direction the block is facing (if not applicable, use Direction.NORTH).
+     * @return A list of positions relative to the "host" TE's position (the actual TE)
+     */
     public abstract List<BlockPos> getStructure(World world, Direction direction);
 
     @Override
@@ -70,18 +80,28 @@ public abstract class AbstractMultiblockTileEntity extends LockableLootTileEntit
         }
         if (world != null && this.ticksExisted++ == 1)
         {
+            Direction direction = Direction.NORTH;
             try
             {
-                structure = getStructure(getWorld(), (Direction) getBlockState().getProperties().stream().filter(prop -> prop instanceof DirectionProperty)
-                                                 .findFirst().get().getValuePair(getBlockState()).getValue());
+                // Try to get the direction of the block
+                // We do this by finding its DirectionProperty, if it has one, and feeding it the BlockState to get its Direction
+                direction = (Direction) getBlockState().getProperties().stream().filter(prop -> prop instanceof DirectionProperty)
+                                                       .findFirst().get().getValuePair(getBlockState()).getValue();
+            } catch (Exception ignored) {}
+
+            try
+            {
+                structure = getStructure(getWorld(), direction);
             }
             catch (Exception e) {}
 
+            // Iterate through the structure and place "filler blocks" that copy the main TE's capabilities
             for (BlockPos blockPos : structure)
             {
                 world.setBlockState(blockPos.add(this.pos), ModBlocks.MULTIBLOCK.getDefaultState(), 3);
                 if (world.getTileEntity(blockPos.add(this.pos)) instanceof MultiBlockPieceTileEntity)
                 {
+                    // Set the owner of the filler block to this block
                     MultiBlockPieceTileEntity fillerTile = (MultiBlockPieceTileEntity) world.getTileEntity(blockPos.add(this.pos));
                     fillerTile.ownerPos = this.pos;
                 }
@@ -92,6 +112,7 @@ public abstract class AbstractMultiblockTileEntity extends LockableLootTileEntit
     @Override
     public void remove()
     {
+        // Drop all items in the inventory
         for (ItemStack stack : inventory)
         {
             if (!stack.isEmpty())
@@ -99,6 +120,8 @@ public abstract class AbstractMultiblockTileEntity extends LockableLootTileEntit
                 InventoryHelper.spawnItemStack(getWorld(), getPos().getX(), getPos().getY(), getPos().getZ(), stack);
             }
         }
+
+        // Delete all filler blocks
         for (BlockPos pos : structure)
         {
             getWorld().setBlockState(pos.add(this.pos), Blocks.AIR.getDefaultState(), 3);

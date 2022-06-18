@@ -93,14 +93,20 @@ public class CrusherTileEntity extends AbstractMultiblockTileEntity
             if (Recipes.CRUSHING.containsKey(inputStack.getItem())
             && batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0)
             {
+                // Get the recipe associated with the input item
                 Pair<Item, Integer> result = Recipes.CRUSHING.get(inputStack.getItem());
+                // Get the item to output
                 ItemStack outputStack = new ItemStack(result.getFirst(), result.getSecond());
+                // Get the item that is currently in the output slot
                 ItemStack stackInOutput = this.getItemInSlot(2);
 
+                // If the output stack can be combined with the current item in the output slot, or the slot is empty
                 if ((outputStack.isItemEqual(stackInOutput) && stackInOutput.getCount() < stackInOutput.getMaxStackSize()) || stackInOutput.isEmpty())
                 {
+                    // Mark this TE as making progress (used for GUI)
                     this.getTileData().putBoolean("active", true);
 
+                    // Drain battery
                     if (this.ticksExisted % 20 == 0)
                     {
                         BatteryItem.setCharge(batteryItem, BatteryItem.getCharge(batteryItem) - 1);
@@ -108,19 +114,24 @@ public class CrusherTileEntity extends AbstractMultiblockTileEntity
 
                     this.setProgress(this.getProgress() + 1);
 
+                    // If the progress is complete, output the item and reset
                     if (this.getProgress() >= MAX_PROGRESS)
                     {
+                        // Remove the input item
                         this.getCap().ifPresent(c -> c.extractItem(1, 1, false));
+                        // Add the output item
                         this.getCap().ifPresent(c -> c.insertItem(2, outputStack, false));
                         this.setProgress(0);
                     }
                 }
+                // If conditions for crafting suddenly become invalid, drain progress
                 else if (this.getProgress() > 0)
                 {
                     this.getTileData().putBoolean("active", false);
                     this.setProgress(Math.max(0, this.getProgress() - 10));
                 }
             }
+            // If conditions for crafting suddenly become invalid, drain progress
             else if (this.getProgress() > 0)
             {
                 this.getTileData().putBoolean("active", false);

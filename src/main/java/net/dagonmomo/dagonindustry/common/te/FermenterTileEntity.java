@@ -92,27 +92,35 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
     {
         super.tick();
         ItemStack batteryItem = this.getItemInSlot(0);
-        boolean hasBattery = batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0;
 
         if (world != null && !world.isRemote)
         {
+            // Every 5 ticks (1/4 second)
             if (this.ticksExisted % 5 == 0)
             {
+                // The fermenter is 5x faster with a battery
+                boolean hasBattery = batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0;
+                int fermentFactor = hasBattery ? 5 : 1;
+
                 shouldUseBattery = false;
                 ItemStack output = this.getItemInSlot(6);
-                int fermentFactor = hasBattery ? 5 : 1;
                 int outputCount = 0;
 
+                // There are 5 progress bars; one for each slot
                 for (int i = 1; i < 6; i++)
                 {
                     ItemStack stack = this.getItemInSlot(i);
+                    // Is the item fermentable
                     if (!stack.isEmpty() && isFermentableItem(stack))
                     {
                         int value = getFermentValue(stack);
+                        // If the output stack can fit in the output slot
                         if (output.isEmpty() || output.getItem() == ModItems.BIOMASS && output.getCount() <= 64 - outputCount - value)
                         {
                             shouldUseBattery = true;
                             this.setProgress(i, this.getProgress(i) + fermentFactor);
+
+                            // If the progress is complete, output the item and reset
                             if (this.getProgress(i) >= MAX_PROGRESS)
                             {
                                 outputCount += value;
@@ -122,12 +130,14 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
                             }
                         }
                     }
+                    // If the item is not fermentable, reset the progress for that slot
                     else
                     {
                         this.setProgress(i, 0);
                     }
                 }
 
+                // Output biomass
                 if (output.isEmpty())
                     this.setItemInSlot(6, new ItemStack(ModItems.BIOMASS, outputCount));
                 else
@@ -137,6 +147,7 @@ public class FermenterTileEntity extends AbstractMultiblockTileEntity
                 {
                     BatteryItem.setCharge(batteryItem, BatteryItem.getCharge(batteryItem) - 1);
                 }
+                // Mark this TE as making progress (used for GUI)
                 this.getTileData().putBoolean("active", hasBattery && shouldUseBattery);
             }
         }

@@ -35,6 +35,9 @@ public class BatteryItem extends Item
         return maxCharge;
     }
 
+    /**
+     * Shorthand for getting the charge of a battery item by digging into its NBT
+     */
     public static double getCharge(ItemStack stack)
     {
         return stack.getOrCreateTag().getDouble("charge");
@@ -50,6 +53,9 @@ public class BatteryItem extends Item
         stack.getOrCreateTag().putDouble("charge", getCharge(stack) + charge);
     }
 
+    /**
+     * Gets the "tier" of this battery item. Lower level batteries don't work in some machines.
+     */
     public int getPowerLevel()
     {
         return powerLevel;
@@ -66,6 +72,9 @@ public class BatteryItem extends Item
         }
     }
 
+    /**
+     * Display the charge of the battery as a damage bar
+     */
     @Override
     public double getDurabilityForDisplay(ItemStack stack)
     {

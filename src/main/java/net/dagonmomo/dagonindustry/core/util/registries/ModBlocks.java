@@ -3,6 +3,9 @@ package net.dagonmomo.dagonindustry.core.util.registries;
 import net.dagonmomo.dagonindustry.core.init.BlockInit;
 import net.minecraft.block.Block;
 
+/**
+ * Utility class that holds some commonly used blocks. Feel free to add the rest (I was lazy for this part)
+ */
 public class ModBlocks
 {
     public static final Block STEAMHAMMER = BlockInit.STEAMHAMMER.get();

@@ -99,16 +99,22 @@ public class PumpjackTileEntity extends AbstractMultiblockTileEntity
 
         if (world != null && !world.isRemote)
         {
+            // Every 20 ticks (1 second)
             if (this.ticksExisted % 20 == 0)
             {
                 isPumping = false;
+                // Very efficient way of getting the chunk at a given position
                 Chunk chunk = world.getChunkProvider().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
 
                 if (chunk != null)
                 {
+                    // If the chunk has oil (it always should, but it's important to check)
                     chunk.getCapability(ChunkOilCapability.CHUNK_OIL).ifPresent(cap ->
                     {
+                        // Get the chunk's oil supply
                         double chunkOil = cap.getOil();
+
+                        // If the chunk has oil, the pumpjack isn't full yet, and there is a battery
                         if (chunkOil > 0 && oil < MAX_OIL
                         && batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0)
                         {
@@ -118,8 +124,10 @@ public class PumpjackTileEntity extends AbstractMultiblockTileEntity
                             setOil(oil + 1);
                             BatteryItem.addCharge(batteryItem, -0.33);
 
+                            // If the pumpjack is full, create an oil bucket and drain 180 oil
                             if (oil >= 180)
                             {
+                                // Search for an empty bucket to dump the oil into
                                 for (int i = 1; i < 6; i++)
                                 {
                                     if (inventory.get(i).getItem() == Items.BUCKET)

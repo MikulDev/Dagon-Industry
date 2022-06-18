@@ -19,7 +19,9 @@ public class PacketHandler
 
     public static void init()
     {
+        // Packet to send NBT to the clientside from the server. Use sparingly as these packets are typically large.
         INSTANCE.registerMessage(0, BlockDataUpdateMessage.class, BlockDataUpdateMessage::encode, BlockDataUpdateMessage::decode, BlockDataUpdateMessage::handle);
+        // Used by the Workbench when the player changes the active recipe
         INSTANCE.registerMessage(1, SetRecipeMessage.class, SetRecipeMessage::encode, SetRecipeMessage::decode, SetRecipeMessage::handle);
     }
 }

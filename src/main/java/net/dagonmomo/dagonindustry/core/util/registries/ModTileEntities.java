@@ -4,6 +4,9 @@ import net.dagonmomo.dagonindustry.common.te.*;
 import net.dagonmomo.dagonindustry.core.init.TileEntityInit;
 import net.minecraft.tileentity.TileEntityType;
 
+/**
+ * Utility class that holds some commonly used TEs. Feel free to add the rest (I was lazy for this part)
+ */
 public class ModTileEntities
 {
     public static TileEntityType<SteamhammerTileEntity> STEAMHAMMER = TileEntityInit.STEAMHAMMER.get();

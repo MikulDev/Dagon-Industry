@@ -90,17 +90,22 @@ public class SteamhammerTileEntity extends AbstractMultiblockTileEntity
         {
             ItemStack ingotItem = this.getItemInSlot(1);
 
+            // If the ingredient has a valid recipe associated with it, and there is a battery
             if (Recipes.METAL_PLATES.containsKey(ingotItem.getItem())
             && batteryItem.getItem() instanceof BatteryItem && BatteryItem.getCharge(batteryItem) > 0)
             {
+                // The item that will be outputted
                 ItemStack outputStack = Recipes.METAL_PLATES.get(ingotItem.getItem()).getDefaultInstance();
+                // The item currently in the output slot
                 ItemStack stackInOutput = this.getItemInSlot(2);
 
-                if (Tags.Items.INGOTS.getAllElements().contains(ingotItem.getItem())
-                && (outputStack.isItemEqual(stackInOutput) && stackInOutput.getCount() < stackInOutput.getMaxStackSize()) || stackInOutput.isEmpty())
+                // If the output stack can be combined with the current item in the output slot, or the slot is empty
+                if ((outputStack.isItemEqual(stackInOutput) && stackInOutput.getCount() < stackInOutput.getMaxStackSize()) || stackInOutput.isEmpty())
                 {
+                    // Mark the tile entity as making progress (used for GUI)
                     this.getTileData().putBoolean("active", true);
 
+                    // Drain the battery
                     if (this.ticksExisted % 20 == 0)
                     {
                         BatteryItem.setCharge(batteryItem, BatteryItem.getCharge(batteryItem) - 1);
@@ -108,19 +113,25 @@ public class SteamhammerTileEntity extends AbstractMultiblockTileEntity
 
                     this.setProgress(this.getProgress() + 1);
 
+                    // If the progress is complete, output the item and reset
                     if (this.getProgress() >= MAX_PROGRESS)
                     {
+                        // Remove the input item
                         this.getCap().ifPresent(c -> c.extractItem(1, 1, false));
+                        // Add the output item
                         this.getCap().ifPresent(c -> c.insertItem(2, outputStack, false));
+                        // Reset the progress
                         this.setProgress(0);
                     }
                 }
+                // If conditions for crafting suddenly become invalid, drain progress
                 else if (this.getProgress() > 0)
                 {
                     this.getTileData().putBoolean("active", false);
                     this.setProgress(Math.max(0, this.getProgress() - 10));
                 }
             }
+            // If conditions for crafting suddenly become invalid, drain progress
             else if (this.getProgress() > 0)
             {
                 this.getTileData().putBoolean("active", false);

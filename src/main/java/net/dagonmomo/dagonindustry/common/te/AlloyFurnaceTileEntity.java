@@ -86,6 +86,7 @@ public class AlloyFurnaceTileEntity extends AbstractMultiblockTileEntity
     {
         super.tick();
 
+        // Is this block currently processing materials
         boolean isMaking = false;
 
         ItemStack batteryItem = this.getItemInSlot(0);
@@ -127,6 +128,7 @@ public class AlloyFurnaceTileEntity extends AbstractMultiblockTileEntity
                             if (this.getProgress() >= MAX_PROGRESS)
                             {
                                 this.setProgress(0);
+                                input1Item.shrink(recipe.getFirst().getCount());
                                 input2Item.shrink(recipe.getSecond().getCount());
 
                                 if (Math.random() < 0.67)
@@ -151,9 +153,6 @@ public class AlloyFurnaceTileEntity extends AbstractMultiblockTileEntity
                                 }
                                 else
                                 {
-                                    input1Item.shrink(1);
-
-
                                     if (outputItem.isEmpty())
                                         this.setItemInSlot(3, recipeResult);
                                     else if (outputItem.getItem() == recipeResult.getItem())

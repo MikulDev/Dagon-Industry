@@ -37,6 +37,7 @@ public class BlockDataUpdateMessage
         {
             context.enqueueWork(() ->
             {
+                // Read the NBT from the packet to the respective TileEntity on the clientside
                 TileEntity te = Minecraft.getInstance().world.getTileEntity(message.blockPos);
                 if (te != null)
                 {

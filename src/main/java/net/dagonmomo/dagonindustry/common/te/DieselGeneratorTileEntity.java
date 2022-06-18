@@ -96,16 +96,22 @@ public class DieselGeneratorTileEntity extends AbstractMultiblockTileEntity
                     this.setBurnTimeLeft(this.getBurnTimeLeft() - 1);
                 }
 
+                // If there are any batteries in the input slots
                 if (batteries.stream().anyMatch(stack -> stack.getItem() instanceof BatteryItem
                 && BatteryItem.getCharge(stack) < ((BatteryItem) stack.getItem()).getMaxCharge()))
                 {
                     ItemStack fuelItem = this.getItemInSlot(3);
 
-                    for (ItemStack battery : batteries)
+                    // If fuel is burning, charge the batteries
+                    if (this.getBurnTimeLeft() > 0)
                     {
-                        BatteryItem.setCharge(battery, BatteryItem.getCharge(battery) + 3);
+                        for (ItemStack battery : batteries)
+                        {
+                            BatteryItem.setCharge(battery, BatteryItem.getCharge(battery) + 3);
+                        }
                     }
 
+                    // If burn time runs out, try to consume fuel
                     if (this.getBurnTimeLeft() <= 0 && Recipes.FUEL_BURN_TIMES.containsKey(fuelItem.getItem()))
                     {
                         setBurnTime(Recipes.FUEL_BURN_TIMES.get(fuelItem.getItem()));

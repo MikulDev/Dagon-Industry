@@ -18,6 +18,7 @@
   "block.dagon_industry.refinery":          "Refinery",
   "block.dagon_industry.workbench":         "Workbench",
   "block.dagon_industry.ammo_bench":        "Ammo Bench",
+  "block.dagon_industry.asphalt":           "Asphalt",
 
   "item.dagon_industry.crude_battery":    "Crude Battery",
   "item.dagon_industry.diesel_battery":   "Diesel Battery",
@@ -53,6 +54,8 @@
   "item.dagon_industry.steel_boots":      "Steel Boots",
   "item.dagon_industry.iron_rod":         "Iron Rod",
   "item.dagon_industry.netherite_rod":    "Netherite Rod",
+
+  "itemGroup.dagon_industry": "Dagon Industry",
 
   "container.dagon_industry.steamhammer":       "Steamhammer",
   "container.dagon_industry.carbon_generator":  "Carbon Generator",

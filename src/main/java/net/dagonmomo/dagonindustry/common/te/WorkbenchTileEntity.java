@@ -115,7 +115,9 @@ public class WorkbenchTileEntity extends AbstractMultiblockTileEntity
                     // Test if the items in the crafting grid match the recipe
                     for (ItemStack recipeStack : recipe.getFirst())
                     {
+                        // Items needed for this ingredient to be satisfied
                         int itemsNeeded = recipeStack.getCount();
+
                         for (int i = 0; i < 9; i++)
                         {
                             // We need this many of the item to satisfy the recipe
@@ -176,11 +178,11 @@ public class WorkbenchTileEntity extends AbstractMultiblockTileEntity
                                         // If the item in the slot is the same as the ingredient
                                         if (stack.isItemEqual(stackInSlot))
                                         {
-                                            // Account for the number of items in this slot
+                                            // Get the number of items in this slot
                                             int slotCount = stackInSlot.getCount();
                                             // Remove the items from the slot
                                             stackInSlot.shrink(itemsToRemove);
-                                            // Count these items for the recipe
+                                            // Decrease the number of items left to satisfy the recipe
                                             itemsToRemove -= slotCount;
                                         }
                                         // If we've removed enough items, move on to the next ingredient

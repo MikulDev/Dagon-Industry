@@ -44,6 +44,7 @@ public class SetRecipeMessage
                     TileEntity te = context.getSender().world.getTileEntity(message.blockPos);
                     if (te instanceof WorkbenchTileEntity)
                     {
+                        // Set the recipe to the one specified and reset the progress to prevent cheesing
                         ((WorkbenchTileEntity) te).setRecipeIndex(message.index);
                         ((WorkbenchTileEntity) te).setProgress(0);
                     }

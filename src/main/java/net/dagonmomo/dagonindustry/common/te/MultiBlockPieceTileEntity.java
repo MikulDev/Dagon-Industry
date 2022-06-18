@@ -11,6 +11,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * This is a "filler block" in a multi-block TileEntity
+ */
 public class MultiBlockPieceTileEntity extends TileEntity
 {
     BlockPos ownerPos;
@@ -28,6 +31,7 @@ public class MultiBlockPieceTileEntity extends TileEntity
     @Override
     public void remove()
     {
+        // If the block is removed, destroy the entire structure
         if (ownerPos != null)
             world.destroyBlock(ownerPos, true, null);
         super.remove();

@@ -32,8 +32,10 @@ public class DagonIndustry
         bus.addListener(this::clientEvents);
         bus.addListener(this::commonEvents);
 
+        // Register packets/handler
         PacketHandler.init();
 
+        // Register everything here
         BlockInit.BLOCKS.register(bus);
         TileEntityInit.TILE_ENTITIES.register(bus);
         ContainerInit.CONTAINERS.register(bus);
@@ -43,6 +45,7 @@ public class DagonIndustry
 
     private void clientEvents(FMLClientSetupEvent event)
     {
+        // Sets the transparency of fluids from this mod
         event.enqueueWork(() ->
         {
             RenderTypeLookup.setRenderLayer(FluidInit.OIL_FLUID.get(),   RenderType.getCutout());
@@ -56,6 +59,7 @@ public class DagonIndustry
 
     private void commonEvents(FMLCommonSetupEvent event)
     {
+        // Register capability for chunk oil
         CapabilityManager.INSTANCE.register(IChunkOilCap.class, new ChunkOilStorage(), ChunkOilCapability::new);
     }
 }

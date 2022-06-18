@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Recipes in this mod are defined in these maps, which are referenced by their respective crafting stations.<br>
+ * I use ItemStacks instead of Items because the quantity of the stack tells the recipe how many items to take/give
+ */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Recipes
 {
@@ -47,34 +51,43 @@ public class Recipes
         }
 
         // Alloy Furnace
-        ALLOYS.put(Pair.of(new ItemStack(Items.IRON_INGOT, 1), new ItemStack(Items.COAL, 3)),       new ItemStack(ModItems.STEEL_INGOT, 1));
-        ALLOYS.put(Pair.of(new ItemStack(Items.IRON_INGOT, 1), new ItemStack(Items.CHARCOAL, 5)),   new ItemStack(ModItems.STEEL_INGOT, 1));
+        // Format: (Pair.of(<ingredient 1>, <ingredient 2>), <result>)
+        ALLOYS.put(Pair.of(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(Items.COAL, 2)),       new ItemStack(ModItems.STEEL_INGOT, 1));
+        ALLOYS.put(Pair.of(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(Items.CHARCOAL, 4)),   new ItemStack(ModItems.STEEL_INGOT, 1));
 
         // Arc Furnace
+        // Format: (new Triple<>(<ingredient 1>, <ingredient 2>, <chance for slag>), <result>)
         ARC_ALLOYS.put(new Triple<>(new ItemStack(Items.IRON_INGOT, 1), new ItemStack(Items.COAL, 2), 0.1), new ItemStack(ModItems.STEEL_INGOT, 1));
         ARC_ALLOYS.put(new Triple<>(new ItemStack(ItemInit.COBALT_ORE.get(), 1), ItemStack.EMPTY, 0.2),     new ItemStack(ModItems.COBALT_PLATE, 1));
 
         // Crusher
+        // Format: (<ingredient>, Pair.of(<result>, <result count>))
+        // (I forget why this doesn't use ItemStacks like everything else)
         CRUSHING.put(Items.IRON_INGOT, Pair.of(Items.IRON_NUGGET, 12));
         CRUSHING.put(Items.GOLD_INGOT, Pair.of(Items.GOLD_NUGGET, 12));
         CRUSHING.put(ItemInit.SULFUR_ORE.get(), Pair.of(ItemInit.SULFUR_POWDER.get(), 4));
 
         // Lathing
+        // Format: (<ingredient>, <result>)
+        // (I forget why this doesn't use ItemStacks like everything else)
         LATHING.put(Items.IRON_INGOT, ItemInit.IRON_ROD.get());
         LATHING.put(ItemInit.COBALT_PLATE.get(), ItemInit.COBALT_ROD.get());
         LATHING.put(ItemInit.STEEL_INGOT.get(), ItemInit.STEEL_ROD.get());
         LATHING.put(Items.NETHERITE_INGOT, ItemInit.NETHERITE_ROD.get());
 
-        // Fuel Burn Times
+        // Fuel Burn Times (Diesel Generator)
+        // Format: (<fuel item>, <burn time>)
         FUEL_BURN_TIMES.put(ItemInit.BIODIESEL_BUCKET.get(), 30);
         FUEL_BURN_TIMES.put(ItemInit.DIESEL_BUCKET.get(), 60);
 
         // Refining
+        // Format: (<ingredient>, new Triple<>(Arrays.asList(<results...>), <failure result>, <failure chance>))
         REFINING.put(ItemInit.OIL_BUCKET.get(), new Triple<>(
                 Arrays.asList(ItemInit.DIESEL_BUCKET.get(), ItemInit.GASOLINE_BUCKET.get(), ItemInit.PROPANE_BUCKET.get()),
                 ModItems.SLAG, 0.5));
 
         // Workbench
+        // Format: (Pair.of(Arrays.asList(<ingredients...>), <recipe time>), <result>)
         WORKBENCH.put(Pair.of(Arrays.asList(new ItemStack(ModItems.STEEL_PLATE, 15),
                                             new ItemStack(ItemInit.STEEL_ROD.get(), 5),
                                             new ItemStack(ItemInit.COBALT_PLATE.get(), 2)), 300), new ItemStack(ItemInit.CRUDE_PISTOL.get(), 1));
@@ -101,6 +114,7 @@ public class Recipes
                                             new ItemStack(ItemInit.COBALT_PLATE.get(), 2)), 300), new ItemStack(ItemInit.STEEL_BOOTS.get(), 1));
 
         // Ammo Bench
+        // Format: (new Triple<>(<ingredient 1>, <ingredient 2>, <ingredient 3>), <result>)
         BALLISTICS.put(new Triple<>(new ItemStack(Items.GUNPOWDER, 1), new ItemStack(ItemInit.IRON_PLATE.get(), 1), new ItemStack(ItemInit.IRON_ROD.get(), 1)),
                        new ItemStack(com.mrcrayfish.guns.init.ModItems.BASIC_BULLET.get(), 10));
     }
